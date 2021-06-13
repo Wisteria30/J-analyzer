@@ -1,0 +1,21 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:1.17
+    container_name: nginx
+    ports:
+      - "8170:80"
+    volumes:
+      - "./nginx_config:/etc/nginx/conf.d/"
+    depends_on: 
+      - server 
+  server:
+    build: ./docker/golang
+    container_name: go-server
+    working_dir: "/.go/src/github.com/Wisteria30/J-analyzer/"
+    command: /.go/bin/air
+    ports:
+      - "8180:3000"
+    volumes:
+      - ./:/.go/src/github.com/Wisteria30/J-analyzer/
+    tty: true
