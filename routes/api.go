@@ -8,7 +8,10 @@ import (
 func Init(e *echo.Echo) {
 	g := e.Group("/v1")
 	{
-		g.GET("/auth", api.GetAuthURL())
-		g.GET("/access-token", api.GetAccessToken())
+		g.GET("/authorize", api.GetAuthCode())
+		g.GET("/callback", api.GetToken())
+		g.GET("/images", api.GetImages())
+		// g.GET("/auth", api.GetAuthURL())
+		// g.GET("/access-token", api.GetAccessToken())
 	}
 }
