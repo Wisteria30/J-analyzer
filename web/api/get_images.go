@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Wisteria30/J-analyzer/lib/gyazo"
@@ -22,7 +21,12 @@ func GetImages() echo.HandlerFunc {
 			logrus.Error("Error Request: ", err)
 			return c.JSON(http.StatusBadRequest, err)
 		}
-		fmt.Println(client)
-		return c.String(http.StatusOK, cookie.Value)
+		list, err := gyazo.GetList(*client, nil)
+		if err != nil {
+			logrus.Error(err)
+			return c.JSON(http.StatusBadRequest, err)
+		}
+
+		return c.JSON(http.StatusOK, *list)
 	}
 }

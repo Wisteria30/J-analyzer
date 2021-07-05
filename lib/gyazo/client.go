@@ -30,22 +30,22 @@ const (
 	DidUploadPath = "/upload.cgi"
 )
 
-// func userEndpoint() string                 { return APIEndpoint + UserPath }
-// func uploadEndpoint() string               { return UploadEndpoint + UploadPath }
-// func listEndpoint() string                 { return APIEndpoint + ListPath }
-func authorizeEndpoint() string { return APIEndpoint + AuthorizePath }
+// func UserEndpoint() string                 { return APIEndpoint + UserPath }
+// func UploadEndpoint() string               { return UploadEndpoint + UploadPath }
+func ListEndpoint() string      { return APIEndpoint + ListPath }
+func AuthorizeEndpoint() string { return APIEndpoint + AuthorizePath }
 func TokenEndpoint() string     { return APIEndpoint + TokenPath }
 
-// func imageEndpoint(imageID string) string  { return APIEndpoint + DeletePathPrefix + imageID }
-// func didUploadEndpoint() string            { return UploadEndpoint + DidUploadPath }
-// func deleteEndpoint(imageID string) string { return APIEndpoint + DeletePathPrefix + imageID }
+// func ImageEndpoint(imageID string) string  { return APIEndpoint + DeletePathPrefix + imageID }
+// func DidUploadEndpoint() string            { return UploadEndpoint + DidUploadPath }
+// func DeleteEndpoint(imageID string) string { return APIEndpoint + DeletePathPrefix + imageID }
 
 func GetConnect() *oauth2.Config {
 	config := &oauth2.Config{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		Endpoint: oauth2.Endpoint{
-			AuthURL:  authorizeEndpoint(),
+			AuthURL:  AuthorizeEndpoint(),
 			TokenURL: TokenEndpoint(),
 		},
 		RedirectURL: os.Getenv("CALLBACK_URL"),
