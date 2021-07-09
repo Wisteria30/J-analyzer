@@ -51,8 +51,12 @@ func GetToken() echo.HandlerFunc {
 		cookie.Expires = time.Now().Add(24 * time.Hour)
 		cookie.HttpOnly = true
 		cookie.Secure = true
+		cookie.Domain = "http://localhost:3000"
 		c.SetCookie(cookie)
-
-		return c.Redirect(http.StatusFound, "http://localhost:8170")
+		// リダイレクト先にCookieを保存する
+		// c.Response().After(func() {
+		// 	c.SetCookie(cookie)
+		// })
+		return c.Redirect(http.StatusFound, "http://localhost:3000")
 	}
 }

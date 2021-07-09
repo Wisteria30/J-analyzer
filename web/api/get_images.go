@@ -13,7 +13,7 @@ func GetImages() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		cookie, err := c.Cookie("token")
 		if err != nil {
-			logrus.Error("Error Request: ", err)
+			logrus.Error("Cookie Error: ", err)
 			return c.JSON(http.StatusBadRequest, err)
 		}
 		client, err := gyazo.NewClient(cookie.Value)
