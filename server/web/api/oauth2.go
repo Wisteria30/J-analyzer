@@ -45,18 +45,25 @@ func GetToken() echo.HandlerFunc {
 		}
 
 		// Access TokenをCookieに保存する
-		cookie := new(http.Cookie)
-		cookie.Name = "token"
-		cookie.Value = token.AccessToken
-		cookie.Expires = time.Now().Add(24 * time.Hour)
-		cookie.HttpOnly = true
-		cookie.Secure = true
-		cookie.Domain = "http://localhost:3000"
-		c.SetCookie(cookie)
+		// cookie := new(http.Cookie)
+		// cookie.Name = "token"
+		// cookie.Value = token.AccessToken
+		// cookie.Expires = time.Now().Add(24 * time.Hour)
+		// cookie.HttpOnly = true
+		// cookie.Secure = true
+		c.SetCookie(&http.Cookie{
+			Name:     "access_token",
+			Value:    token.AccessToken,
+			Expires:  time.Now().Add(24 * time.Hour),
+			HttpOnly: true,
+			Domain:   "http://localhost:8170/",
+			SameSite: 4,
+			Secure:   true,
+		})
 		// リダイレクト先にCookieを保存する
 		// c.Response().After(func() {
 		// 	c.SetCookie(cookie)
 		// })
-		return c.Redirect(http.StatusFound, "http://localhost:3000")
+		return c.Redirect(http.StatusFound, "http://localhost:8170/")
 	}
 }

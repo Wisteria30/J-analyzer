@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/Wisteria30/J-analyzer/routes"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -13,7 +15,7 @@ func init() {
 	if err != nil {
 		logrus.Fatal("Error loading .env")
 	}
-	
+
 	logrus.SetLevel(logrus.DebugLevel)
 	logrus.SetFormatter(&logrus.JSONFormatter{})
 }
@@ -24,7 +26,12 @@ func main() {
 	//Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	e.Use(middleware.CORS())
+	// e.Use(middleware.CORS())
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins:     []string{"*"},
+		AllowHeaders:     []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
+		AllowCredentials: true,
+	}))
 
 	routes.Init(e)
 

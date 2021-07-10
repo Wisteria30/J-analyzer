@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Wisteria30/J-analyzer/lib/gyazo"
@@ -11,7 +12,7 @@ import (
 // GyazoからImages一覧を取得する
 func GetImages() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		cookie, err := c.Cookie("token")
+		cookie, err := c.Cookie("access_token")
 		if err != nil {
 			logrus.Error("Cookie Error: ", err)
 			return c.JSON(http.StatusBadRequest, err)
@@ -26,7 +27,7 @@ func GetImages() echo.HandlerFunc {
 			logrus.Error(err)
 			return c.JSON(http.StatusBadRequest, err)
 		}
-
+		fmt.Println(list.Images)
 		return c.JSON(http.StatusOK, *list)
 	}
 }

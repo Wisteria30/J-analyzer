@@ -8,14 +8,25 @@ services:
     volumes:
       - "./nginx_config:/etc/nginx/conf.d/"
     depends_on: 
-      - server 
+      - server
+      - client
   server:
     build: ./docker/golang
-    container_name: go-server
+    container_name: server
     working_dir: "/.go/src/github.com/Wisteria30/J-analyzer/"
     command: /.go/bin/air
     ports:
       - "8180:3000"
     volumes:
-      - ./:/.go/src/github.com/Wisteria30/J-analyzer/
+      - ./server:/.go/src/github.com/Wisteria30/J-analyzer/
+    tty: true
+  client:
+    image: node:14.1-buster
+    command: npm run dev
+    container_name: client
+    working_dir: "/app"
+    ports:
+        - "8190:3000"
+    volumes:
+        - "./client:/app"
     tty: true
