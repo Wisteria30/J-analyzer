@@ -1,9 +1,5 @@
 <template>
-  <img
-    class="GyazoLogo"
-    alt="Gyazo Logo"
-    src="/gyazo.png"
-  >
+  <img class="GyazoLogo" alt="Gyazo Logo" src="/gyazo.png" />
 </template>
 
 <style>

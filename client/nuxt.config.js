@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
+process.env.DEBUG = 'nuxt:*'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   server: {

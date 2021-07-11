@@ -1,9 +1,5 @@
 <template>
-  <img
-    class="Itihime"
-    alt="Itihime"
-    src="/itihime.png"
-  >
+  <img class="Itihime" alt="Itihime" src="/itihime.png" />
 </template>
 
 <style>

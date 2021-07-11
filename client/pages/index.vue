@@ -6,13 +6,11 @@
         <GyazoLogo />
       </v-card>
       <v-card>
-        <v-card-title class="headline">
-          Jantama Analyzer
-        </v-card-title>
+        <v-card-title class="headline"> Jantama Analyzer </v-card-title>
         <v-card-text>
           <p>雀魂のプレイ画面を読み込んで、盤面から何切るを解析する</p>
           <p>Gyazoと連携します</p>
-          <hr class="my-3">
+          <hr class="my-3" />
           <a
             href="https://game.mahjongsoul.com/"
             target="_blank"
@@ -20,7 +18,7 @@
           >
             雀魂
           </a>
-          <br>
+          <br />
           <a
             href="https://gyazo.com/"
             target="_blank"
@@ -38,20 +36,8 @@
           >
             Gyazoにログイン
           </v-btn>
-          <v-btn
-            color="accent"
-            nuxt
-            @click="Hello"
-          >
-            Hello
-          </v-btn>
-          <v-btn
-            color="accent"
-            nuxt
-            @click="Images"
-          >
-            画像一覧
-          </v-btn>
+          <v-btn color="accent" nuxt @click="Hello"> Hello </v-btn>
+          <v-btn color="accent" nuxt @click="Images"> 画像一覧 </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -59,27 +45,28 @@
 </template>
 
 <script>
-  import ROUTES from '~/routes/api';
-  export default {
-    methods: {
-      Hello() {
-        const payload = {
-          uri: ROUTES.GET.HELLO
-        }
-        this.$store.dispatch('hello', payload)
-      },
-      Images() {
-        const payload = {
-          uri: ROUTES.GET.IMAGES
-        }
-        this.$store.dispatch('getImages', payload)
-      },
-      Authorize() {
-        const payload = {
-          uri: ROUTES.GET.AUTH
-        }
-        this.$store.dispatch('userAuthorization', payload)
+import ROUTES from '~/routes/api'
+export default {
+  middleware: 'authenticated',
+  methods: {
+    Hello() {
+      const payload = {
+        uri: ROUTES.GET.HELLO,
       }
-    }
+      this.$store.dispatch('hello', payload)
+    },
+    Images() {
+      const payload = {
+        uri: ROUTES.GET.IMAGES,
+      }
+      this.$store.dispatch('getImages', payload)
+    },
+    Authorize() {
+      const payload = {
+        uri: ROUTES.GET.AUTH,
+      }
+      this.$store.dispatch('userAuthorization', payload)
+    },
+  },
 }
 </script>

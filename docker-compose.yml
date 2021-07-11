@@ -21,8 +21,8 @@ services:
       - ./server:/.go/src/github.com/Wisteria30/J-analyzer/
     tty: true
   client:
-    image: node:14.1-buster
-    command: npm run dev
+    build: ./docker/nuxt
+    command: yarn dev
     container_name: client
     working_dir: "/app"
     ports:
