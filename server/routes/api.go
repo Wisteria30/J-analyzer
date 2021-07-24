@@ -11,8 +11,5 @@ func Init(e *echo.Echo) {
 		g.GET("/authorize", api.GetAuthCode())
 		g.GET("/token", api.GetToken())
 		g.GET("/images", api.GetImages())
-		g.GET("/user", api.GetUser())
-		// g.GET("/auth", api.GetAuthURL())
-		// g.GET("/access-token", api.GetAccessToken())
 	}
 }

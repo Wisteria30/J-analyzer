@@ -30,7 +30,6 @@
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt @click="Authorize"> Gyazoにログイン </v-btn>
-          <v-btn color="accent" nuxt @click="Hello"> Hello </v-btn>
           <v-btn color="accent" nuxt @click="Images"> 画像一覧 </v-btn>
         </v-card-actions>
       </v-card>
@@ -42,15 +41,6 @@
 import ROUTES from '~/routes/api'
 export default {
   methods: {
-    Oauth() {
-      this.$store.dispatch('oauthGyazo')
-    },
-    Hello() {
-      const payload = {
-        uri: ROUTES.GET.HELLO,
-      }
-      this.$store.dispatch('hello', payload)
-    },
     Images() {
       const payload = {
         uri: ROUTES.GET.IMAGES,
