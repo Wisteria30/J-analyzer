@@ -1,7 +1,12 @@
+install:
+	docker run -it --rm -v $(PWD)/client:/app -w /app node:14.1-buster yarn install
 up:
-	docker-compose build
 	docker-compose up -d
 down:
 	docker-compose down
 log:
-	docker-compose logs -f
+	docker-compose logs -f --tail=100
+log-client:
+	docker-compose logs -f --tail=100 client
+ps:
+	docker-compose ps
