@@ -1,8 +1,5 @@
-CLIENT=client
-
 install:
-	docker build -t $(CLIENT) -f docker/nuxt/Dockerfile 
-	docker run -it --rm -v $(PWD)/client:/app -w /app $(CLIENT) yarn install
+	docker run -it --rm -v $(PWD)/client:/app -w /app node:14.1-buster yarn install
 up:
 	docker-compose up -d
 down:

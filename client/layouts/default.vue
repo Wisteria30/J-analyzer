@@ -19,6 +19,5 @@ export default {
     TheHeader,
     TheFooter,
   },
-  middleware: 'authenticated',
 }
 </script>

@@ -1,38 +1,43 @@
 import colors from 'vuetify/es5/util/colors'
 
 process.env.DEBUG = 'nuxt:*'
+console.log(process.env)
 
 export default {
+  // env: {
+  //   clientID: process.env.CLIENTID,
+  //   clientSecret: process.env.CLIENT_SECRET,
+  //   callbackURL: process.env.CALLBACKURL,
+  // },
+  // publicRuntimeConfig: {
+  //   clientID: process.env.CLIENTID,
+  //   clientSecret: process.env.CLIENT_SECRET,
+  //   callbackURL: process.env.CALLBACKURL,
+  // },
   // Global page headers: https://go.nuxtjs.dev/config-head
   server: {
-    host: '0.0.0.0'
+    host: '0.0.0.0',
   },
   head: {
     titleTemplate: '%s - client',
     title: 'client',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/axios',
-    '~/plugins/cookies-to-state',
-  ],
+  plugins: ['~/plugins/axios', '~/plugins/cookies-to-state'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,16 +56,22 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'http://localhost:8170/',
-    credentials: true
+    credentials: true,
   },
   proxy: {
-    '/api': '/'
+    '/api': {
+      target: 'http://localhost:8170',
+      pathRewrite: {
+        '^/api/': '/api/',
+      },
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -76,14 +87,14 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+          success: colors.green.accent3,
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    loadingScreen: false
-  }
+    loadingScreen: false,
+  },
 }

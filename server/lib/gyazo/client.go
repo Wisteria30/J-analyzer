@@ -30,12 +30,12 @@ const (
 	DidUploadPath = "/upload.cgi"
 )
 
-// func UserEndpoint() string                 { return APIEndpoint + UserPath }
-// func UploadEndpoint() string               { return UploadEndpoint + UploadPath }
+func UserEndpoint() string      { return APIEndpoint + UserPath }
 func ListEndpoint() string      { return APIEndpoint + ListPath }
 func AuthorizeEndpoint() string { return APIEndpoint + AuthorizePath }
 func TokenEndpoint() string     { return APIEndpoint + TokenPath }
 
+// func UploadEndpoint() string               { return UploadEndpoint + UploadPath }
 // func ImageEndpoint(imageID string) string  { return APIEndpoint + DeletePathPrefix + imageID }
 // func DidUploadEndpoint() string            { return UploadEndpoint + DidUploadPath }
 // func DeleteEndpoint(imageID string) string { return APIEndpoint + DeletePathPrefix + imageID }

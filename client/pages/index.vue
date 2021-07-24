@@ -29,13 +29,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            href="http://localhost:8170/api/v1/authorize"
-          >
-            Gyazoにログイン
-          </v-btn>
+          <v-btn color="primary" nuxt @click="Authorize"> Gyazoにログイン </v-btn>
           <v-btn color="accent" nuxt @click="Hello"> Hello </v-btn>
           <v-btn color="accent" nuxt @click="Images"> 画像一覧 </v-btn>
         </v-card-actions>
@@ -47,8 +41,10 @@
 <script>
 import ROUTES from '~/routes/api'
 export default {
-  middleware: 'authenticated',
   methods: {
+    Oauth() {
+      this.$store.dispatch('oauthGyazo')
+    },
     Hello() {
       const payload = {
         uri: ROUTES.GET.HELLO,

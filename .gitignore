@@ -9,6 +9,7 @@ vendor
 *.iml
 *.out
 .vscode
+*firebase-adminsdk*.json
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template

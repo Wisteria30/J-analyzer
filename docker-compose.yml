@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   nginx:
     image: nginx:1.17
@@ -20,8 +20,10 @@ services:
     volumes:
       - ./server:/.go/src/github.com/Wisteria30/J-analyzer/
     tty: true
+    depends_on: 
+      - db
   client:
-    build: ./docker/nuxt
+    image: node:14.1-buster
     command: yarn dev
     container_name: client
     working_dir: "/app"
@@ -30,3 +32,23 @@ services:
     volumes:
         - "./client:/app"
     tty: true
+  db:
+    image: mysql:8.0
+    container_name: app-db
+    restart: always
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: j-analyzer
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_USER: default
+      MYSQL_PASSWORD: password
+      TZ: Asia/Tokyo
+    ports:
+    - "3306:3306"
+    volumes:
+    - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
