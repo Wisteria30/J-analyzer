@@ -1,10 +1,4 @@
 export default function ({ store, route, redirect }) {
-  if (route.name === 'index' && !store.getters.isLoggedIn) {
-    return redirect('/')
-  }
-  // if (!store.getters.isLoggedIn) {
-  //   return redirect('/')
-  // }
   if (route.name === 'index' && store.getters.isLoggedIn) {
     return redirect('/list')
   }

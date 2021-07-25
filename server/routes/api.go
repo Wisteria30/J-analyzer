@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/Wisteria30/J-analyzer/middlewares"
 	"github.com/Wisteria30/J-analyzer/web/api"
 	"github.com/labstack/echo/v4"
 )
@@ -10,6 +11,6 @@ func Init(e *echo.Echo) {
 	{
 		g.GET("/authorize", api.GetAuthCode())
 		g.GET("/token", api.GetToken())
-		g.GET("/images", api.GetImages())
+		g.GET("/images", api.GetImages(), middlewares.FirebaseGuard())
 	}
 }

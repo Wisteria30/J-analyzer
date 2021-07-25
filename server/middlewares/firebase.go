@@ -21,9 +21,12 @@ func Firebase() echo.MiddlewareFunc {
 			}
 
 			auth, err := app.Auth(context.Background())
+			if err != nil {
+				return err
+			}
 
 			c.Set("firebase", auth)
-
+ 
 			if err := next(c); err != nil {
 				return err
 			}

@@ -104,7 +104,7 @@ func GetToken() echo.HandlerFunc {
 			if err != nil {
 				logrus.Fatal("error creating user: ", err)
 			}
-			logrus.Info("create user: ", u)
+			logrus.Info("Successfully created user: ", u)
 			// db追加
 			user = models.User{
 				UID: u.UID, 
@@ -118,6 +118,11 @@ func GetToken() echo.HandlerFunc {
 		if user.Email != gyazo_user.User.Email {
 			user.Email = gyazo_user.User.Email
 			dbs.DB.Save(&user)
+			u, err := authClient.UpdateUser(context.Background(), user.UID, (&auth.UserToUpdate{}).Email(user.Email))
+			if err != nil {
+				logrus.Fatal("error updating user: ", err)
+			}
+			logrus.Info("Successfully updated user: ", u)
 		}
 		jwt_token, _ := authClient.CustomToken(context.Background(), user.UID)
 		// res := &TokenResponse{token.AccessToken}

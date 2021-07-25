@@ -14,7 +14,6 @@ export default {
       state: this.$route.query.state,
       code: this.$route.query.code,
     }
-    await console.log(payload)
     await this.$store.dispatch('getToken', payload)
   },
 }

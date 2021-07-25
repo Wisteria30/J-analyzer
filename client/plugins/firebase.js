@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 if (!firebase.apps.length) {
+  // #TODO envファイルから読み込めるようにする
   firebase.initializeApp({
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,

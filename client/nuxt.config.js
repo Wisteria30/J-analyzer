@@ -1,7 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
 process.env.DEBUG = 'nuxt:*'
-console.log(process.env)
 
 export default {
   // env: {
@@ -54,9 +53,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
   ],
 

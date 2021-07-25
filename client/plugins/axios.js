@@ -1,3 +1,9 @@
-export default ({ $axios }) => {
-    $axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+export default ({ $axios, app }) => {
+  $axios.onRequest((config) => {
+    const token = app.$cookies.get('jwt_token')
+    if (token) {
+      config.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+      config.headers.common.Authorization = `Bearer ${token}`
+    }
+  })
 }
