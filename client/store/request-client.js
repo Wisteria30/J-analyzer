@@ -13,7 +13,9 @@ export class RequestClient {
       .map((key) => key + '=' + params[key])
       .join('&')
     const query = queryString.length > 0 ? `${uri}?${queryString}` : uri
-    return await this.axios.$get(query)
+    return await this.axios.$get(query).catch((err) => {
+      return this.retry(err)
+    })
   }
 
   async post(uri) {
@@ -39,7 +41,7 @@ export class RequestClient {
           method: 'POST',
           headers: { 'content-type': 'application/x-www-form-urlencoded' },
           data: qs.stringify(data),
-          url: 'https://securetoken.googleapis.com/v1/token?key={process.env.FIREBASE_API_KEY}',
+          url: `https://securetoken.googleapis.com/v1/token?key=${process.env.apiKey}`,
         })
 
         this.store.dispatch('setToken', res.id_token)

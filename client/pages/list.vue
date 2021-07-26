@@ -18,3 +18,11 @@
     </v-col>
   </v-row>
 </template>
+
+<script>
+export default {
+  computed: {
+    images() { return this.$store.getters.getImages }
+  }
+}
+</script>

@@ -42,7 +42,7 @@
 <script>
 import ROUTES from '~/routes/api'
 export default {
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   methods: {
     Images() {
       const payload = {
