@@ -13,7 +13,14 @@ export class RequestClient {
       .map((key) => key + '=' + params[key])
       .join('&')
     const query = queryString.length > 0 ? `${uri}?${queryString}` : uri
+    console.log(
+      'retryするかも',
+      query,
+      this.store.getters.isLoggedIn,
+      !!this.axios
+    )
     return await this.axios.$get(query).catch((err) => {
+      console.log('retryした')
       return this.retry(err)
     })
   }
@@ -27,7 +34,7 @@ export class RequestClient {
   async retry(err) {
     const code = parseInt(err.response && err.response.status)
     const refreshToken = this.cookies.get('refresh_token') || null
-
+    console.log(err, code, refreshToken, this.hasRetried)
     if (code === 401 && refreshToken && this.hasRetried === false) {
       this.hasRetried = true
 

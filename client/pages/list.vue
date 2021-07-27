@@ -1,5 +1,6 @@
 <template>
   <v-row>
+    {{ this.$store.getters.getImages }}
     <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
       <v-img
         :src="`https://i.gyazo.com/08f8fda49373fcada6f28e4cd0c3dbb7.jpg`"
@@ -20,9 +21,25 @@
 </template>
 
 <script>
+import ROUTES from '~/routes/api'
 export default {
+  async fetch() {
+    const payload = {
+      uri: ROUTES.GET.IMAGES,
+    }
+    await this.$store.dispatch('getImages', payload)
+  },
+  // async beforeCreate() {
+  //   const payload = {
+  //     uri: ROUTES.GET.IMAGES,
+  //   }
+  //   await this.$store.dispatch('getImages', payload)
+  // },
   computed: {
-    images() { return this.$store.getters.getImages }
-  }
+    images() {
+      console.log('images: ', this.$store.getters.getImages)
+      return this.$store.getters.getImages
+    },
+  },
 }
 </script>

@@ -35,7 +35,7 @@ export const actions = {
   async getImages({ commit }, payload) {
     const client = createRequestClient(this.$axios, this.$cookies, this)
     const res = await client.get(payload.uri, payload.params)
-    console.log(res)
+    await console.log(res)
     commit('mutateGetImages', res)
   },
   setToken({ commit }, payload) {
@@ -49,8 +49,9 @@ export const mutations = {
     state.token = payload
   },
   mutateGetImages(state, payload) {
-    state.images = payload.Images
-    state.meta = payload.Meta
+    console.log('payload: ', payload)
+    // state.images = payload.Images
+    // state.meta = payload.Meta
   },
 }
 
