@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/Wisteria30/J-analyzer/middlewares"
 	"github.com/Wisteria30/J-analyzer/routes"
 	"github.com/joho/godotenv"
@@ -29,11 +27,12 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Use(middlewares.DatabaseService())
 	e.Use(middlewares.Firebase())
-	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins:     []string{"*"},
-		AllowHeaders:     []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
-		AllowCredentials: true,
-	}))
+	e.Use(middleware.CORS())
+	// e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+	// 	AllowOrigins:     []string{"*"},
+	// 	AllowHeaders:     []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
+	// 	AllowCredentials: true,
+	// }))
 
 	routes.Init(e)
 

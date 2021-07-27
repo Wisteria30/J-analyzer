@@ -54,14 +54,15 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://localhost:8170/',
-    credentials: true,
+    browserBaseURL: 'http://localhost:8170',
+    // baseURL: 'http://server:3000',
+    proxy: true,
   },
   proxy: {
-    '/api': {
-      target: 'http://localhost:8170',
+    '/api/': {
+      target: 'http://server:3000',
       pathRewrite: {
-        '^/api/': '/api/',
+        '^/api/': '',
       },
     },
   },
