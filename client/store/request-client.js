@@ -13,12 +13,6 @@ export class RequestClient {
       .map((key) => key + '=' + params[key])
       .join('&')
     const query = queryString.length > 0 ? `${uri}?${queryString}` : uri
-    console.log(
-      'retryするかも',
-      query,
-      this.store.getters.isLoggedIn,
-      !!this.axios
-    )
     return await this.axios.$get(query).catch((err) => {
       console.log('retryした')
       return this.retry(err)

@@ -32,7 +32,7 @@
           <v-btn color="primary" nuxt @click="Authorize">
             Gyazoにログイン
           </v-btn>
-          <v-btn color="accent" nuxt @click="Images"> 画像一覧 </v-btn>
+          <v-btn color="accent" to="/images"> 画像一覧 </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -42,14 +42,7 @@
 <script>
 import ROUTES from '~/routes/api'
 export default {
-  // middleware: 'authenticated',
   methods: {
-    Images() {
-      const payload = {
-        uri: ROUTES.GET.IMAGES,
-      }
-      this.$store.dispatch('getImages', payload)
-    },
     Authorize() {
       const payload = {
         uri: ROUTES.GET.AUTH,

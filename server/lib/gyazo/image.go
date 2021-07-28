@@ -19,6 +19,25 @@ type Image struct {
 	CreatedAt    string `json:"created_at"`
 }
 
+type ImageDetails struct {
+	ID           string      `json:"image_id"`
+	PermalinkURL string      `json:"permalink_url"`
+	ThumbURL     string      `json:"thumb_url"`
+	URL          string      `json:"url"`
+	Type         string      `json:"type"`
+	CreatedAt    string      `json:"created_at"`
+	Metadata     struct {
+		App   string      `json:"app"`
+		Title string      `json:"title"`
+		URL   string      `json:"url"`
+		Desc  string      `json:"desc"`
+	} `json:"metadata"`
+	Ocr struct {
+		Locale      string `json:"locale"`
+		Description string `json:"description"`
+	} `json:"ocr"`
+}
+
 // ErrorResponse reports error caused by API request.
 type ErrorResponse struct {
 	Status  string
@@ -86,6 +105,30 @@ func GetList(c http.Client, opts *ListOptions) (*List, error) {
 	}
 
 	return list, nil
+}
+
+func GetImage(c http.Client, image_id string) (*ImageDetails, error) {
+	url := ImageEndpoint(image_id)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create a new request: %w", err)
+	}
+	res, err := c.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to a get request: %w", err)
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		return nil, buildErrorResponse(res)
+	}
+	image := &ImageDetails{}
+
+	if err = json.NewDecoder(res.Body).Decode(&image); err != nil {
+		return nil, fmt.Errorf("failed to decode a responsed JSON: %w", err)
+	}
+
+	return image, nil
 }
 
 // buildErrorResponse builds an error information from a HTTP response.

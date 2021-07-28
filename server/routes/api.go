@@ -11,6 +11,7 @@ func Init(e *echo.Echo) {
 	{
 		g.GET("/authorize", api.GetAuthCode())
 		g.GET("/token", api.GetToken())
-		g.GET("/images", api.GetImages(), middlewares.FirebaseGuard())
+		g.GET("/images", api.GetList(), middlewares.FirebaseGuard())
+		g.GET("/images/:id", api.GetImage(), middlewares.FirebaseGuard())
 	}
 }

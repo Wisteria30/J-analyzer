@@ -3,8 +3,10 @@ import { createRequestClient } from './request-client'
 
 export const state = () => ({
   images: [],
+  image: {},
   meta: {},
   token: '',
+  analysis: [],
 })
 
 export const actions = {
@@ -32,15 +34,24 @@ export const actions = {
       this.app.router.push('/')
     }
   },
-  async getImages({ commit }, payload) {
+  async getList({ commit }, payload) {
     const client = createRequestClient(this.$axios, this.$cookies, this)
     const res = await client.get(payload.uri, payload.params)
-    await console.log(res)
-    commit('mutateGetImages', res)
+    commit('mutateList', res)
   },
   setToken({ commit }, payload) {
     this.$cookies.set('jwt_token', payload)
     commit('mutateToken', payload)
+  },
+  async findImage({ commit }, payload) {
+    const client = createRequestClient(this.$axios, this.$cookies, this)
+    const res = await client.get(payload.uri, payload.params)
+    commit('mutateImage', res)
+  },
+  async imageAnalyze({ commit }, payload) {
+    const client = createRequestClient(this.$axios, this.$cookies, this)
+    const res = await client.post(payload.uri, payload.params)
+    commit('mutateAnalysis', res)
   },
 }
 
@@ -48,18 +59,29 @@ export const mutations = {
   mutateToken(state, payload) {
     state.token = payload
   },
-  mutateGetImages(state, payload) {
-    console.log('payload: ', payload)
-    // state.images = payload.Images
-    // state.meta = payload.Meta
+  mutateList(state, payload) {
+    state.images = payload.Images
+    state.meta = payload.Meta
+  },
+  mutateImage(state, payload) {
+    state.image = payload
+  },
+  mutateAnalysis(state, payload) {
+    state.analysis = payload
   },
 }
 
 export const getters = {
-  getToken(state) {
+  image(state) {
+    return state.image
+  },
+  analysis(state) {
+    return state.analysis
+  },
+  token(state) {
     return state.token
   },
-  getImages(state) {
+  list(state) {
     return state.images
   },
   getMeta(state) {

@@ -32,6 +32,7 @@ const (
 
 func UserEndpoint() string      { return APIEndpoint + UserPath }
 func ListEndpoint() string      { return APIEndpoint + ListPath }
+func ImageEndpoint(image_id string) string     {return APIEndpoint + ListPath + "/" + image_id}
 func AuthorizeEndpoint() string { return APIEndpoint + AuthorizePath }
 func TokenEndpoint() string     { return APIEndpoint + TokenPath }
 

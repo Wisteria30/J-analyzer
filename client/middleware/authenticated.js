@@ -1,8 +1,8 @@
 export default function ({ store, route, redirect }) {
-  if (route.name === 'list' && !store.getters.isLoggedIn) {
+  if (route.name === 'images' && !store.getters.isLoggedIn) {
     return redirect('/')
   }
   if (route.name === 'index' && store.getters.isLoggedIn) {
-    return redirect('/list')
+    return redirect('/images')
   }
 }

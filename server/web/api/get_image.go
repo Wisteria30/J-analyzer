@@ -13,11 +13,11 @@ import (
 )
 
 // GyazoからImages一覧を取得する
-func GetImages() echo.HandlerFunc {
+func GetImage() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		dbs := c.Get("dbs").(*middlewares.DatabaseClient)
 		token := c.Get("auth").(*auth.Token)
-
+		image_id := c.Param("id")
 		user := models.User{}
 		dbs.DB.Table("users").Where(models.User{UID: token.UID}).First(&user)
 		client, err := gyazo.NewClient(user.AccessToken)
@@ -25,12 +25,12 @@ func GetImages() echo.HandlerFunc {
 			logrus.Error("Error Request: ", err)
 			return c.JSON(http.StatusBadRequest, err)
 		}
-		list, err := gyazo.GetList(*client, nil)
+		image, err := gyazo.GetImage(*client, image_id)
 		if err != nil {
 			logrus.Error(err)
 			return c.JSON(http.StatusBadRequest, err)
 		}
-		fmt.Println(list.Images)
-		return c.JSON(http.StatusOK, *list)
+		fmt.Println(image)
+		return c.JSON(http.StatusOK, *image)
 	}
 }
