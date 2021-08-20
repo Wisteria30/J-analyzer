@@ -11,6 +11,9 @@ vendor
 .vscode
 *firebase-adminsdk*.json
 
+# Recognition Server
+__pycache__/
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs

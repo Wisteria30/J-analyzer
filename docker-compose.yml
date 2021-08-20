@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   nginx:
     image: nginx:1.17
@@ -7,7 +7,7 @@ services:
       - "8170:80"
     volumes:
       - "./nginx_config:/etc/nginx/conf.d/"
-    depends_on: 
+    depends_on:
       - server
       - client
   server:
@@ -20,17 +20,29 @@ services:
     volumes:
       - ./server:/.go/src/github.com/Wisteria30/J-analyzer/
     tty: true
-    depends_on: 
+    depends_on:
       - db
+  recognition:
+    build: ./docker/python
+    container_name: recognition
+    working_dir: "/app"
+    command: gunicorn main:app
+    volumes:
+      - ./recognition:/app
+    ports:
+      - "8200:8000"
+    environment:
+      - PORT=8000
+    tty: true
   client:
-    image: node:14.1-buster
+    build: ./docker/client
     command: yarn dev
     container_name: client
     working_dir: "/app"
     ports:
-        - "8190:3000"
+      - "8190:3000"
     volumes:
-        - "./client:/app"
+      - "./client:/app"
     tty: true
   db:
     image: mysql:8.0
@@ -46,9 +58,9 @@ services:
       MYSQL_PASSWORD: password
       TZ: Asia/Tokyo
     ports:
-    - "3306:3306"
+      - "3306:3306"
     volumes:
-    - dbdata:/var/lib/mysql
+      - dbdata:/var/lib/mysql
 
 volumes:
   dbdata:

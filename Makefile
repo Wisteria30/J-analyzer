@@ -1,5 +1,6 @@
 install:
-	docker run -it --rm -v $(PWD)/client:/app -w /app node:14.1-buster yarn install
+	docker-compose build
+	docker-compose run client yarn install
 up:
 	docker-compose up -d
 down:
