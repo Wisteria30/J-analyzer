@@ -6,7 +6,7 @@ export const ROUTES = {
     IMAGE: '/api/v1/images/:id',
   },
   POST: {
-    ANALYZE: '/api/v1/images/:id',
+    ANALYZE: '/api/v1/analyze',
   },
 }
 

@@ -1,3 +1,4 @@
+from urllib.parse import unquote
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
@@ -29,7 +30,7 @@ def read_root():
     tags=['recognition']
     )
 def recognition(img_url: str):
-    resp = extract(img_url)
+    resp = extract(unquote(img_url))
     if type(resp) == str:
         raise HTTPException(status_code=400, detail=resp)
     return resp

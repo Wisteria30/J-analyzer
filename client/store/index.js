@@ -51,6 +51,7 @@ export const actions = {
   async imageAnalyze({ commit }, payload) {
     const client = createRequestClient(this.$axios, this.$cookies, this)
     const res = await client.post(payload.uri, payload.params)
+    console.log(res)
     commit('mutateAnalysis', res)
   },
 }

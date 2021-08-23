@@ -36,6 +36,7 @@ import ROUTES from '~/routes/api'
 export default {
   computed: {
     item() {
+      console.log(this.$store.getters.image)
       return this.$store.getters.image
     },
   },
@@ -46,11 +47,17 @@ export default {
   },
   methods: {
     Analyze() {
-      console.log('Analyzeする')
-      // const payload = {
-      //   uri: ROUTES.POST.ANALYZE,
-      // }
-      // this.$store.dispatch('imageAnalyze', payload)
+      if (
+        this.$store.getters.image.metadata.title ===
+        '雀魂 -じゃんたま-| 麻雀を無料で気軽に'
+      ) {
+        const payload = {
+          uri: ROUTES.POST.ANALYZE,
+          params: this.$store.getters.image,
+        }
+        this.$store.dispatch('imageAnalyze', payload)
+      }
+      console.log('雀魂アプリの画面じゃないので解析できないよ')
     },
   },
 }
