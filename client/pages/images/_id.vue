@@ -47,17 +47,21 @@ export default {
   },
   methods: {
     Analyze() {
+      console.log(this.$store.getters.image.metadata.title)
       if (
         this.$store.getters.image.metadata.title ===
         '雀魂 -じゃんたま-| 麻雀を無料で気軽に'
       ) {
         const payload = {
-          uri: ROUTES.POST.ANALYZE,
-          params: this.$store.getters.image,
+          uri: ROUTES.GET.ANALYZE,
+          params: {
+            img_url: this.$store.getters.image.url,
+          },
         }
         this.$store.dispatch('imageAnalyze', payload)
+      } else {
+        console.log('雀魂アプリの画面じゃないので解析できないよ')
       }
-      console.log('雀魂アプリの画面じゃないので解析できないよ')
     },
   },
 }
