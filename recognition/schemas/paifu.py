@@ -2,8 +2,8 @@ from pydantic import BaseModel
 
 
 class PaifuResponse(BaseModel):
-    hands: list[str]
-    bakaze: str
-    jikaze: str
-    dora: list[str]
-    junme: int
+    zikaze: int
+    bakaze: int
+    turn: int
+    dora_indicators: list[int]
+    hand_tiles: list[int]
