@@ -1,0 +1,32 @@
+# デフォルト設定
+BasedOnStyle: LLVM
+# インデント幅
+IndentWidth: 4
+# 言語
+Language: Cpp
+Standard: c++17
+# 1行あたりの
+ColumnLimit: 100
+# 改行コード
+UseCRLF: false
+# 追加オプション
+# コンストラクタ初期化子
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+AllowAllConstructorInitializersOnNextLine: true
+BreakConstructorInitializers: BeforeComma
+# パラメータ
+AllowAllArgumentsOnNextLine: true
+# 引数
+AllowAllParametersOfDeclarationOnNextLine: true
+# 改行
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  AfterClass: true
+  AfterEnum: true
+  AfterNamespace: true
+  AfterStruct: true
+  BeforeCatch: true
+  BeforeElse: true
+SortIncludes: true
+ReflowComments: false

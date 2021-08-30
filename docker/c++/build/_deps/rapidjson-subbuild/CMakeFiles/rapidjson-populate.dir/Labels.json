@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/CMakeFiles/rapidjson-populate"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/CMakeFiles/rapidjson-populate.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/CMakeFiles/rapidjson-populate-complete.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/rapidjson-populate-prefix/src/rapidjson-populate-stamp/rapidjson-populate-build.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/rapidjson-populate-prefix/src/rapidjson-populate-stamp/rapidjson-populate-configure.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/rapidjson-populate-prefix/src/rapidjson-populate-stamp/rapidjson-populate-download.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/rapidjson-populate-prefix/src/rapidjson-populate-stamp/rapidjson-populate-install.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/rapidjson-populate-prefix/src/rapidjson-populate-stamp/rapidjson-populate-mkdir.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/rapidjson-populate-prefix/src/rapidjson-populate-stamp/rapidjson-populate-patch.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/rapidjson-populate-prefix/src/rapidjson-populate-stamp/rapidjson-populate-test.rule"
+		},
+		{
+			"file" : "/app/build/_deps/rapidjson-subbuild/rapidjson-populate-prefix/src/rapidjson-populate-stamp/rapidjson-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"rapidjson-populate"
+		],
+		"name" : "rapidjson-populate"
+	}
+}

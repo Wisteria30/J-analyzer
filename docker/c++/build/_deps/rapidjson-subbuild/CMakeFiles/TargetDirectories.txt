@@ -1,0 +1,3 @@
+/app/build/_deps/rapidjson-subbuild/CMakeFiles/rebuild_cache.dir
+/app/build/_deps/rapidjson-subbuild/CMakeFiles/rapidjson-populate.dir
+/app/build/_deps/rapidjson-subbuild/CMakeFiles/edit_cache.dir

@@ -22,6 +22,18 @@ services:
     tty: true
     depends_on:
       - db
+      - recognition
+      - analyzer
+  client:
+    build: ./docker/client
+    command: yarn dev
+    container_name: client
+    working_dir: "/app"
+    ports:
+      - "8190:3000"
+    volumes:
+      - "./client:/app"
+    tty: true
   recognition:
     build: ./docker/python
     container_name: recognition
@@ -34,15 +46,15 @@ services:
     environment:
       - PORT=8000
     tty: true
-  client:
-    build: ./docker/client
-    command: yarn dev
-    container_name: client
-    working_dir: "/app"
-    ports:
-      - "8190:3000"
+  analyzer:
+    build: ./docker/c++
+    container_name: analyzer
+    working_dir: "/build"
+    command: ./src/server/server
     volumes:
-      - "./client:/app"
+      - ./analyzer:/app
+    ports:
+      - 8210:8888
     tty: true
   db:
     image: mysql:8.0
