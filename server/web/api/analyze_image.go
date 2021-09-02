@@ -3,7 +3,6 @@ package api
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 	"path"
@@ -69,15 +68,13 @@ func AnalyzeImage() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err)
 		}
 		defer resp.Body.Close()
-		fmt.Println("RESP JSON")
-		fmt.Println(resp.Body)
 
-		result := new(analyzer.Result)
-		if err = json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		analysis := new(analyzer.Analysis)
+		if err = json.NewDecoder(resp.Body).Decode(&analysis); err != nil {
 			logrus.Error("failed to decode a responsed JSON: ", err)
 			return c.JSON(http.StatusBadRequest, err)
 		}
 
-		return c.JSON(http.StatusOK, result)
+		return c.JSON(http.StatusOK, analysis)
 	}
 }

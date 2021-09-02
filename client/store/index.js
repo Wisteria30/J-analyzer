@@ -6,7 +6,10 @@ export const state = () => ({
   image: {},
   meta: {},
   token: '',
-  analysis: [],
+  analysisRequest: {},
+  analysisResponse: {},
+  analysisSuccess: false,
+  loading: false,
 })
 
 export const actions = {
@@ -49,14 +52,18 @@ export const actions = {
     commit('mutateImage', res)
   },
   async imageAnalyze({ commit }, payload) {
+    commit('mutateLoading', {})
     const client = createRequestClient(this.$axios, this.$cookies, this)
     const res = await client.get(payload.uri, payload.params)
-    console.log(res)
     commit('mutateAnalysis', res)
+    commit('mutateLoading', {})
   },
 }
 
 export const mutations = {
+  mutateLoading(state, payload) {
+    state.loading = !state.loading
+  },
   mutateToken(state, payload) {
     state.token = payload
   },
@@ -68,7 +75,9 @@ export const mutations = {
     state.image = payload
   },
   mutateAnalysis(state, payload) {
-    state.analysis = payload
+    state.analysisSuccess = payload.success
+    state.analysisRequest = payload.request
+    state.analysisResponse = payload.response
   },
 }
 
@@ -76,8 +85,14 @@ export const getters = {
   image(state) {
     return state.image
   },
-  analysis(state) {
-    return state.analysis
+  analysisRequest(state) {
+    return state.analysisRequest
+  },
+  analysisResponse(state) {
+    return state.analysisResponse
+  },
+  analysisSuccess(state) {
+    return state.analysisSuccess
   },
   token(state) {
     return state.token
@@ -90,5 +105,8 @@ export const getters = {
   },
   isLoggedIn(state) {
     return !!state.token
+  },
+  loading(state) {
+    return state.loading
   },
 }

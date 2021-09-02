@@ -4,7 +4,7 @@ const (
 	AnalyzerAPIEndpoint = "http://analyzer:8888"
 )
 
-type Result struct {
+type Analysis struct {
 	Success bool `json:"success"`
 	Request struct {
 		Zikaze         int           `json:"zikaze"`
