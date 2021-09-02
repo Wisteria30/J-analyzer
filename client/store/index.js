@@ -52,17 +52,25 @@ export const actions = {
     commit('mutateImage', res)
   },
   async imageAnalyze({ commit }, payload) {
-    commit('mutateLoading', {})
+    commit('mutateLoading', { loading: true })
     const client = createRequestClient(this.$axios, this.$cookies, this)
     const res = await client.get(payload.uri, payload.params)
     commit('mutateAnalysis', res)
-    commit('mutateLoading', {})
+    commit('mutateLoading', { loading: false })
+  },
+  resetResponse({ commit }, payload) {
+    commit('mutateLoading', { loading: false })
+    commit('mutateAnalysis', {
+      success: null,
+      request: {},
+      response: {},
+    })
   },
 }
 
 export const mutations = {
   mutateLoading(state, payload) {
-    state.loading = !state.loading
+    state.loading = payload.loading
   },
   mutateToken(state, payload) {
     state.token = payload

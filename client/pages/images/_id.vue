@@ -56,6 +56,7 @@
                     ></v-img>
                   </div>
                 </v-row>
+                <br />
                 <h3>手牌:</h3>
                 <br />
                 <v-row no-gutters>
@@ -143,6 +144,7 @@ export default {
     await store.dispatch('findImage', {
       uri: ROUTES.GET.IMAGE.replace(':id', route.params.id),
     })
+    store.dispatch('resetResponse', {})
   },
   computed: {
     image() {
