@@ -6,6 +6,7 @@ export const state = () => ({
   image: {},
   meta: {},
   token: '',
+  refreshToken: '',
   analysisRequest: {},
   analysisResponse: {},
   analysisSuccess: false,
@@ -30,9 +31,12 @@ export const actions = {
 
       const res = await firebase.auth().signInWithCustomToken(customToken)
       const token = await res.user.getIdToken()
-      this.$cookies.set('jwt_token', token)
       const refreshToken = res.user.refreshToken
       this.$cookies.set('refresh_token', refreshToken)
+      commit('mutateRefreshToken', refreshToken)
+      const dt = new Date()
+      dt.setHours(dt.getHours() + 1)
+      this.$cookies.set('jwt_token', token, { expires: dt })
       commit('mutateToken', token)
       this.app.router.push('/')
     }
@@ -43,7 +47,9 @@ export const actions = {
     commit('mutateList', res)
   },
   setToken({ commit }, payload) {
-    this.$cookies.set('jwt_token', payload)
+    const dt = new Date()
+    dt.setHours(dt.getHours() + 1)
+    this.$cookies.set('jwt_token', payload, { expires: dt })
     commit('mutateToken', payload)
   },
   async findImage({ commit }, payload) {
@@ -74,6 +80,9 @@ export const mutations = {
   },
   mutateToken(state, payload) {
     state.token = payload
+  },
+  mutateRefreshToken(state, payload) {
+    state.refreshToken = payload
   },
   mutateList(state, payload) {
     state.images = payload.Images
@@ -113,6 +122,9 @@ export const getters = {
   },
   isLoggedIn(state) {
     return !!state.token
+  },
+  hasRefreshToken(state) {
+    return !!state.refreshToken
   },
   loading(state) {
     return state.loading

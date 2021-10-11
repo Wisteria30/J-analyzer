@@ -25,6 +25,7 @@
 <script>
 import ROUTES from '~/routes/api'
 export default {
+  middleware: 'authenticated',
   async fetch() {
     const payload = {
       uri: ROUTES.GET.LIST,

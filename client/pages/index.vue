@@ -42,6 +42,7 @@
 <script>
 import ROUTES from '~/routes/api'
 export default {
+  middleware: 'authenticated',
   methods: {
     Authorize() {
       const payload = {

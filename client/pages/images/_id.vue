@@ -140,6 +140,7 @@
 import ROUTES from '~/routes/api'
 
 export default {
+  middleware: 'authenticated',
   async fetch({ store, route }) {
     await store.dispatch('findImage', {
       uri: ROUTES.GET.IMAGE.replace(':id', route.params.id),

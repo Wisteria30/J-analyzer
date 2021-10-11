@@ -28,7 +28,6 @@ export class RequestClient {
   async retry(err) {
     const code = parseInt(err.response && err.response.status)
     const refreshToken = this.cookies.get('refresh_token') || null
-    console.log(err, code, refreshToken, this.hasRetried)
     if (code === 401 && refreshToken && this.hasRetried === false) {
       this.hasRetried = true
 

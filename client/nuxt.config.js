@@ -16,8 +16,7 @@ export default {
     host: '0.0.0.0',
   },
   head: {
-    titleTemplate: '%s - client',
-    title: 'client',
+    title: 'J-Analyzer',
     htmlAttrs: {
       lang: 'en',
     },
