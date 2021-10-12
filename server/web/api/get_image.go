@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 
 	"firebase.google.com/go/v4/auth"
@@ -30,7 +29,6 @@ func GetImage() echo.HandlerFunc {
 			logrus.Error(err)
 			return c.JSON(http.StatusBadRequest, err)
 		}
-		fmt.Println(image)
 		return c.JSON(http.StatusOK, *image)
 	}
 }

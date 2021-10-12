@@ -3,8 +3,9 @@ services:
   nginx:
     image: nginx:1.17
     container_name: nginx
+    restart: always
     ports:
-      - "8170:80"
+      - "80:80"
     volumes:
       - "./nginx_config:/etc/nginx/conf.d/"
     depends_on:
@@ -13,6 +14,7 @@ services:
   server:
     build: ./docker/golang
     container_name: server
+    restart: always
     working_dir: "/.go/src/github.com/Wisteria30/J-analyzer/"
     command: /.go/bin/air
     ports:
@@ -28,6 +30,7 @@ services:
     build: ./docker/client
     command: yarn dev
     container_name: client
+    restart: always
     working_dir: "/app"
     ports:
       - "8190:3000"
@@ -37,6 +40,7 @@ services:
   recognition:
     build: ./docker/python
     container_name: recognition
+    restart: always
     working_dir: "/app"
     command: gunicorn main:app
     volumes:
@@ -49,6 +53,7 @@ services:
   analyzer:
     build: ./docker/c++
     container_name: analyzer
+    restart: always
     working_dir: "/build"
     command: ./src/server/server
     volumes:
@@ -64,10 +69,10 @@ services:
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
     environment:
-      MYSQL_DATABASE: j-analyzer
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_USER: default
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
       TZ: Asia/Tokyo
     ports:
       - "3306:3306"

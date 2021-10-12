@@ -11,6 +11,11 @@
 make up
 ```
 
+必要に応じて
+
+```sh
+docker-compose exec server go run tools/migrate.go
+```
 
 # J-analyzer-python
 ## これ何

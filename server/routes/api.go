@@ -7,6 +7,7 @@ import (
 )
 
 func Init(e *echo.Echo) {
+	e.GET("/health", api.GetHealth())
 	g := e.Group("/v1")
 	{
 		g.GET("/authorize", api.GetAuthCode())
