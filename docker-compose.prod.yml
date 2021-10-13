@@ -1,0 +1,75 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:1.17
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - "./nginx_config:/etc/nginx/conf.d/"
+    depends_on:
+      - server
+      - client
+  server:
+    build: ./docker/golang
+    container_name: server
+    restart: always
+    working_dir: "/.go/src/github.com/Wisteria30/J-analyzer/"
+    command: go run main.go
+    volumes:
+      - ./server:/.go/src/github.com/Wisteria30/J-analyzer/
+    tty: true
+    depends_on:
+      - db
+      - recognition
+      - analyzer
+  client:
+    build: ./docker/client
+    command: yarn start
+    container_name: client
+    restart: always
+    working_dir: "/app"
+    volumes:
+      - "./client:/app"
+    tty: true
+  recognition:
+    build: ./docker/python
+    container_name: recognition
+    restart: always
+    working_dir: "/app"
+    command: gunicorn main:app
+    volumes:
+      - ./recognition:/app
+    environment:
+      - PORT=8000
+    tty: true
+  analyzer:
+    build: ./docker/c++
+    container_name: analyzer
+    restart: always
+    working_dir: "/build"
+    command: ./src/server/server
+    volumes:
+      - ./analyzer:/app
+    tty: true
+  db:
+    image: mysql:8.0
+    container_name: app-db
+    restart: always
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: Asia/Tokyo
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:

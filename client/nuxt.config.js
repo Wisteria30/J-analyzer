@@ -53,8 +53,9 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    browserBaseURL: 'http://localhost',
+    browserBaseURL: process.env.BROWSER_BASE_URL,
     proxy: true,
+    retry: true,
   },
   proxy: {
     '/api/': {

@@ -28,11 +28,6 @@ func main() {
 	e.Use(middlewares.DatabaseService())
 	e.Use(middlewares.Firebase())
 	e.Use(middleware.CORS())
-	// e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-	// 	AllowOrigins:     []string{"*"},
-	// 	AllowHeaders:     []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
-	// 	AllowCredentials: true,
-	// }))
 
 	routes.Init(e)
 

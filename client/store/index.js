@@ -85,7 +85,8 @@ export const mutations = {
     state.refreshToken = payload
   },
   mutateList(state, payload) {
-    state.images = payload.Images
+    // 20件帰ってくるが、GyazoのProユーザー以外は最新10件までしかimage_idが取れない
+    state.images = payload.Images.filter((n) => n.image_id !== '')
     state.meta = payload.Meta
   },
   mutateImage(state, payload) {
