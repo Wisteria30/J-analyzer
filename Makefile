@@ -1,6 +1,6 @@
 install:
 	docker-compose run client yarn install
-build-clinet:
+build-client:
 	docker-compose run client yarn build
 migration:
 	docker-compose up -d db
