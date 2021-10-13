@@ -47,10 +47,15 @@ export const actions = {
     commit('mutateList', res)
   },
   setToken({ commit }, payload) {
-    const dt = new Date()
-    dt.setHours(dt.getHours() + 1)
-    this.$cookies.set('jwt_token', payload, { expires: dt })
+    if (!this.$cookies.get('jwt_token')) {
+      const dt = new Date()
+      dt.setHours(dt.getHours() + 1)
+      this.$cookies.set('jwt_token', payload, { expires: dt })
+    }
     commit('mutateToken', payload)
+  },
+  setRefreshToken({ commit }, payload) {
+    commit('mutateRefreshToken', payload)
   },
   async findImage({ commit }, payload) {
     const client = createRequestClient(this.$axios, this.$cookies, this)
