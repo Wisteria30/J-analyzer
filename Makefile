@@ -6,7 +6,7 @@ migration:
 	docker-compose up -d db
 	docker-compose run server go run tools/migrate.go
 up:
-	docker-compose up -d
+	docker-compose -f docker-compose.yml up -d
 up-prod:
 	docker-compose -f docker-compose.prod.yml up -d
 down:
