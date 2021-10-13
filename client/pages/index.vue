@@ -29,10 +29,10 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
+          <v-btn color="accent" to="/howto"> 使い方 </v-btn>
           <v-btn color="primary" nuxt @click="Authorize">
             Gyazoにログイン
           </v-btn>
-          <v-btn color="accent" to="/images"> 画像一覧 </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
