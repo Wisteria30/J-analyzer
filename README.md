@@ -5,16 +5,33 @@
 - make
 
 ## Setup
-1. start up project
+1. .env, client/.env, server/.envを配置
+2. clientのyarn install
+
+```sh
+make install
+```
+
+3. DB migration
+
+```sh
+make migration
+```
+
+4. up
 
 ```sh
 make up
 ```
 
-必要に応じて
+Productionならclientのbuildとproduction用のdocker-composeを使用
 
 ```sh
-docker-compose exec server go run tools/migrate.go
+make build-clinet
+```
+
+```sh
+make up-prod
 ```
 
 # J-analyzer-python

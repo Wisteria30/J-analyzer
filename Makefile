@@ -1,8 +1,14 @@
 install:
-	docker-compose build
 	docker-compose run client yarn install
+build-clinet:
+	docker-compose run client yarn build
+migration:
+	docker-compose up -d db
+	docker-compose run server go run tools/migrate.go
 up:
 	docker-compose up -d
+up-prod:
+	docker-compose -f docker-compose.prod.yml up -d
 down:
 	docker-compose down
 log:
