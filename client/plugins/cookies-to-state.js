@@ -3,4 +3,8 @@ export default ({app, store}) => {
     if (token) {
         store.dispatch('setToken', token)
     }
+    const refreshToken = app.$cookies.get('refresh_token')
+    if (refreshToken) {
+        store.dispatch('setRefreshToken', refreshToken)
+    }
 }
