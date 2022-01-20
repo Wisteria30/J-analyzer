@@ -20,12 +20,25 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
+hand_templates = None
+bakaze_templates = None
+jikaze_templates = None
+dora_templates = None
+yohai_templates = None
 
-hand_templates = load_templates('template/hand/')
-bakaze_templates = load_templates('template/bakaze/')
-jikaze_templates = load_templates('template/jikaze/')
-dora_templates = load_templates('template/dora/')
-yohai_templates = load_templates('template/yohai/')
+
+@app.on_event("startup")
+async def startup():
+    global hand_templates
+    global bakaze_templates
+    global jikaze_templates
+    global dora_templates
+    global yohai_templates
+    hand_templates = load_templates('template/hand/')
+    bakaze_templates = load_templates('template/bakaze/')
+    jikaze_templates = load_templates('template/jikaze/')
+    dora_templates = load_templates('template/dora/')
+    yohai_templates = load_templates('template/yohai/')
 
 
 @app.get('/')
@@ -39,7 +52,7 @@ def read_root():
     response_model=PaifuResponse,
     summary='recognition pai',
     tags=['recognition']
-    )
+)
 def recognition(img_url: str):
     recog_img = img2url(img_url)
     resp = extract(
@@ -59,7 +72,7 @@ def recognition(img_url: str):
     response_model=PaifuTestResponse,
     summary='recognition pai test return string',
     tags=['recognition_test']
-    )
+)
 def recognition_test(img_url: str):
     resp = extract_test(unquote(img_url))
     if type(resp) == str:
